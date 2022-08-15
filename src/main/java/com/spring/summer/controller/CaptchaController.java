@@ -3,6 +3,7 @@ package com.spring.summer.controller;
 import com.google.code.kaptcha.Producer;
 import com.spring.summer.admin.AjaxResult;
 import com.spring.summer.common.utils.Base64;
+import com.spring.summer.config.UuidToString;
 import org.springframework.util.FastByteArrayOutputStream;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,7 +29,9 @@ public class CaptchaController {
     @GetMapping("/captchaImage")
     public AjaxResult getCode(HttpServletResponse response){
 
-        UUID uuid = UUID.randomUUID();
+        UUID uuids = UUID.randomUUID();
+        String uuid = UuidToString.UUIDToUtils(uuids);
+
         String code = null;
         BufferedImage image = null;
         AjaxResult ajaxResult = AjaxResult.success();
