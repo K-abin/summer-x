@@ -10,11 +10,16 @@ class SummerApplicationTests {
 
     @Test
     void contextLoads() {
-        UUID uuid = UUID.randomUUID();
-        System.out.println(uuid);
-        String string = uuid.toString();
-        String replace = string.replace("-", "");
-        System.out.println(replace);
-    }
+        UUID uuids = UUID.randomUUID();
+        StringBuilder stringBuilder = null;
+        String[] split = uuids.toString().split("");
+        for (int i = 0; i < split.length - 1; i++) {
+            if (split[i] == "-") {
+                stringBuilder.append("");
+            }
+            stringBuilder = stringBuilder.append(split[i]);
 
+            System.out.println(stringBuilder);
+        }
+    }
 }

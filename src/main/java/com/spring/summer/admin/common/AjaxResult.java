@@ -1,7 +1,6 @@
-package com.spring.summer.admin;
+package com.spring.summer.admin.common;
 
 import lombok.Data;
-import org.springframework.util.StringUtils;
 
 import java.util.HashMap;
 
