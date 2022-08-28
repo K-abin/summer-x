@@ -3,13 +3,13 @@ package com.spring.summer.component;
 import com.spring.summer.admin.common.LoginUser;
 import com.spring.summer.common.utils.Constants;
 import com.spring.summer.common.utils.RedisCache;
+import com.spring.summer.common.utils.StringUtils;
 import com.spring.summer.common.utils.UuidToString;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -45,8 +45,8 @@ public class TokenService {
 //    token 过期时间单位转换
     public static final long MILLIS_MINUTE = 60 * 1000;
 
-
-
+//    二十分钟
+    private static final Long MILLIS_MINUTE_TWENTY = 20 * 60 * 1000L;
 
 
     /**
@@ -140,10 +140,23 @@ public class TokenService {
      * @return
      */
     private String getToken(HttpServletRequest request) {
-        String headerToken = request.getHeader(this.header);
-        if (!(headerToken.equals("")||headerToken.equals(null)) && headerToken.startsWith(Constants.TOKEN_PREFIX)){
+        String headerToken = request.getHeader(header);
+        System.out.println("headerToken"+headerToken+"-----------------");
+        if (!(StringUtils.isNotEmpty(headerToken))&& headerToken.startsWith(Constants.TOKEN_PREFIX)){
             headerToken.replace(Constants.TOKEN_PREFIX,"");
         }
         return headerToken;
+    }
+
+    /**
+     * 验证令牌的有效期，如果用户令牌有效时间-当前时间 < 20 则刷新令牌
+     * @param loginUser
+     */
+    public void verifyToken(LoginUser loginUser){
+        Long expireTime = loginUser.getExpireTime();
+        long currentTimeMillis = System.currentTimeMillis();
+        if (expireTime - currentTimeMillis <= MILLIS_MINUTE_TWENTY){
+            refreshToken(loginUser);
+        }
     }
 }

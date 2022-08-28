@@ -4,7 +4,7 @@ import com.spring.summer.admin.common.LoginBody;
 import com.spring.summer.admin.common.LoginUser;
 import com.spring.summer.common.utils.RedisCache;
 import com.spring.summer.component.TokenService;
-import com.spring.summer.service.SysUserService;
+
 
 
 import org.springframework.security.authentication.AuthenticationManager;
@@ -27,12 +27,6 @@ public class SysLoginService {
 
     @Resource
     private AuthenticationManager authenticationManager;
-
-    @Resource
-    private RedisCache redisCache;
-
-    @Resource
-    private SysUserService sysUserService;
 
 
     Authentication authenticate = null;

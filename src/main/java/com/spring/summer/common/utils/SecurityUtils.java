@@ -1,4 +1,4 @@
-package com.spring.summer.security.filter;
+package com.spring.summer.common.utils;
 
 import com.spring.summer.admin.common.LoginUser;
 
@@ -22,10 +22,20 @@ public class SecurityUtils {
      * @return
      */
     public static Long getUserId(){
-        return getLoginUser().getUserId();
+        try {
+            return getLoginUser().getUserId();
+        }catch (Exception e){
+            throw new ServiceException("获取用户ID异常",HttpStatus.UNAUTHORIZED);
+        }
+
+
     }
 
-    private static LoginUser getLoginUser() {
+    /**
+     * 获取用户
+     * @return
+     */
+    public static LoginUser getLoginUser() {
         try {
            return (LoginUser) getAuthentication().getPrincipal();
         }catch (Exception e){
@@ -33,8 +43,13 @@ public class SecurityUtils {
         }
     }
 
-    private static Authentication getAuthentication() {
+    /**
+     * 获取Authentication
+     * @return
+     */
+    public static Authentication getAuthentication() {
        return SecurityContextHolder.getContext().getAuthentication();
     }
+
 
 }

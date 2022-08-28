@@ -2,9 +2,15 @@ package com.spring.summer.controller;
 
 import com.spring.summer.admin.common.AjaxResult;
 import com.spring.summer.admin.common.LoginBody;
+import com.spring.summer.common.utils.Constants;
+import com.spring.summer.service.impl.SysLoginService;
+
+import org.aspectj.weaver.ast.Var;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
 
 /**
  * @Author CXB
@@ -15,24 +21,22 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class LoginController {
 
+@Resource
+private SysLoginService sysLoginService;
 
 
     /**
      *  登录成功后返回令牌
-     * @param loginBody
-     * @return
+     * @param loginBody 登录信息
+     * @return 结果
      */
     @PostMapping("/login")
     public AjaxResult login(@RequestBody LoginBody loginBody){
 
         AjaxResult success = AjaxResult.success();
-
-
-
+        String token = sysLoginService.login(loginBody);
+        success.put(Constants.TOKEN,token);
+        return success;
     }
-
-
-
-
-
 }
+
