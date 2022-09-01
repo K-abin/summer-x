@@ -33,6 +33,7 @@ private SysLoginService sysLoginService;
     @PostMapping("/login")
     public AjaxResult login(@RequestBody LoginBody loginBody){
 
+        System.out.println(loginBody);
         AjaxResult success = AjaxResult.success();
         String token = sysLoginService.login(loginBody);
         success.put(Constants.TOKEN,token);

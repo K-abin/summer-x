@@ -6,6 +6,8 @@ import com.spring.summer.common.utils.Base64;
 import com.spring.summer.common.utils.Constants;
 import com.spring.summer.common.utils.RedisCache;
 import com.spring.summer.common.utils.UuidToString;
+import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.FastByteArrayOutputStream;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,6 +27,7 @@ import java.util.concurrent.TimeUnit;
  * @Description 验证码操纵处理
  */
 @RestController
+@Slf4j
 public class CaptchaController {
     @Resource(name = "captchaProducer")
     private Producer captchaProducer;
@@ -46,7 +49,7 @@ public class CaptchaController {
 
         code = captchaProducer.createText();
         image = captchaProducer.createImage(code);
-        System.err.println("验证码内容code："+code+"------------------------------");
+        log.info("--------------------------------- /captchaImage {} 验证码code：+"+ code +"+ ------------------------------------------");
         //缓存验证码
         redisCache.setCacheObject(verifyKey,code,Constants.EXPIRATION, TimeUnit.MINUTES);
         FastByteArrayOutputStream outputStream = new FastByteArrayOutputStream();
@@ -57,7 +60,6 @@ public class CaptchaController {
         }
         ajaxResult.put("uuid",uuid);
         ajaxResult.put("img", Base64.encode(outputStream.toByteArray()));
-        System.err.println("验证码获取成功");
         return ajaxResult;
     }
 

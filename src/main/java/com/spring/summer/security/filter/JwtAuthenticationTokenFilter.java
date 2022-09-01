@@ -38,13 +38,12 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
         String requestURI = request.getRequestURI();
 
-        if (requestURI.equals("/captchaImage")){
-            System.err.println("=======================================================艾克bihui输");
+        if (requestURI.equals("/captchaImage") || requestURI.equals("/login")){
+            logger.info("--------------------------------- /captchaImage {} 验证码拦截器放行 ------------------------------------------");
             filterChain.doFilter(request,response);
             return;
         }
         LoginUser loginUser = tokenService.getLoginUser(request);
-        System.err.println(loginUser+"------------------------------------------------------------");;
           if (!(loginUser.equals(null)) && !(SecurityUtils.getAuthentication().equals(null))){
             tokenService.verifyToken(loginUser);
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginUser, null, loginUser.getAuthorities());
