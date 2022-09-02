@@ -3,6 +3,7 @@ package com.spring.summer.admin;
 import com.spring.summer.admin.common.BaseEntity;
 import lombok.Data;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -111,4 +112,38 @@ public class SysUser extends BaseEntity {
      */
     private Long roleId;
 
+
+    public boolean isAdmin(){
+       return isAdmin(userId);
+    }
+
+    public static boolean isAdmin(Long userId){
+        return userId !=null && userId == 1L;
+    }
+
+
+    @Override
+    public String toString() {
+        return "SysUser{" +
+                "userId=" + userId +
+                ", deptId=" + deptId +
+                ", userName='" + userName + '\'' +
+                ", nickName='" + nickName + '\'' +
+                ", email='" + email + '\'' +
+                ", phonenumber='" + phonenumber + '\'' +
+                ", sex='" + sex + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", password='" + password + '\'' +
+                ", salt='" + salt + '\'' +
+                ", status='" + status + '\'' +
+                ", delFlag='" + delFlag + '\'' +
+                ", loginIp='" + loginIp + '\'' +
+                ", loginDate=" + loginDate +
+                ", dept=" + dept +
+                ", roles=" + roles +
+                ", roleIds=" + Arrays.toString(roleIds) +
+                ", postIds=" + Arrays.toString(postIds) +
+                ", roleId=" + roleId +
+                '}';
+    }
 }

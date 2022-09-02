@@ -1,5 +1,6 @@
 package com.spring.summer.admin;
 
+import com.spring.summer.admin.common.BaseEntity;
 import lombok.Data;
 
 /**
@@ -8,8 +9,8 @@ import lombok.Data;
  * @date 2022/8/20 9:17
  * @Description TODO
  */
-@Data
-public class SysRole {
+
+public class SysRole extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
@@ -73,4 +74,104 @@ public class SysRole {
      */
     private Long[] deptIds;
 
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public Long getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
+    public String getRoleKey() {
+        return roleKey;
+    }
+
+    public void setRoleKey(String roleKey) {
+        this.roleKey = roleKey;
+    }
+
+    public String getRoleSort() {
+        return roleSort;
+    }
+
+    public void setRoleSort(String roleSort) {
+        this.roleSort = roleSort;
+    }
+
+    public String getDataScope() {
+        return dataScope;
+    }
+
+    public void setDataScope(String dataScope) {
+        this.dataScope = dataScope;
+    }
+
+    public boolean isMenuCheckStrictly() {
+        return menuCheckStrictly;
+    }
+
+    public void setMenuCheckStrictly(boolean menuCheckStrictly) {
+        this.menuCheckStrictly = menuCheckStrictly;
+    }
+
+    public boolean isDeptCheckStrictly() {
+        return deptCheckStrictly;
+    }
+
+    public void setDeptCheckStrictly(boolean deptCheckStrictly) {
+        this.deptCheckStrictly = deptCheckStrictly;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getDelFlag() {
+        return delFlag;
+    }
+
+    public void setDelFlag(String delFlag) {
+        this.delFlag = delFlag;
+    }
+
+    public boolean isFlag() {
+        return flag;
+    }
+
+    public void setFlag(boolean flag) {
+        this.flag = flag;
+    }
+
+    public Long[] getMenuIds() {
+        return menuIds;
+    }
+
+    public void setMenuIds(Long[] menuIds) {
+        this.menuIds = menuIds;
+    }
+
+    public Long[] getDeptIds() {
+        return deptIds;
+    }
+
+    public void setDeptIds(Long[] deptIds) {
+        this.deptIds = deptIds;
+    }
 }

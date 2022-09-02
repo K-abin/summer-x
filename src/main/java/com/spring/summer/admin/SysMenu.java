@@ -1,6 +1,7 @@
 package com.spring.summer.admin;
 
 import com.spring.summer.admin.common.BaseEntity;
+import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
  * @date 2022/8/20 9:19
  * @Description TODO
  */
-
+@Data
 public class SysMenu extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
@@ -96,4 +97,25 @@ public class SysMenu extends BaseEntity {
      */
     private List<SysMenu> children = new ArrayList<SysMenu>();
 
+    @Override
+    public String toString() {
+        return "SysMenu{" +
+                "menuId=" + menuId +
+                ", menuName='" + menuName + '\'' +
+                ", parentName='" + parentName + '\'' +
+                ", parentId=" + parentId +
+                ", orderNum=" + orderNum +
+                ", path='" + path + '\'' +
+                ", component='" + component + '\'' +
+                ", query='" + query + '\'' +
+                ", isFrame='" + isFrame + '\'' +
+                ", isCache='" + isCache + '\'' +
+                ", menuType='" + menuType + '\'' +
+                ", visible='" + visible + '\'' +
+                ", status='" + status + '\'' +
+                ", perms='" + perms + '\'' +
+                ", icon='" + icon + '\'' +
+                ", children=" + children +
+                '}';
+    }
 }

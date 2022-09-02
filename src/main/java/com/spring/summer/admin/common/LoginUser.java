@@ -264,9 +264,15 @@ public class LoginUser implements UserDetails {
         this.user = user;
     }
 
+    /**
+     * 获取角色权限
+     * @return
+     */
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities()
-    {
-        return null;
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        if (permissions !=null && permissions.size() > 0){
+            return permissions.stream().map(p->new SimpleGrantedAuthority(p)).collect(Collectors.toList());
+        }
+        return new ArrayList<>();
     }
 }

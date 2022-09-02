@@ -17,4 +17,10 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     public static boolean isNotEmpty(String string){
         return !isEmpty(string);
     }
+
+
+
+    public static boolean isNull(Object object){
+        return  object == null;
+    }
 }

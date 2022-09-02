@@ -2,8 +2,12 @@ package com.spring.summer.service.impl;
 
 import com.spring.summer.admin.SysUser;
 import com.spring.summer.admin.common.LoginUser;
+import com.spring.summer.common.utils.StringUtils;
 import com.spring.summer.exception.ServiceException;
+import com.spring.summer.service.PermissionService;
 import com.spring.summer.service.SysUserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -11,6 +15,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.security.Permission;
 
 
 /**
@@ -22,20 +27,27 @@ import javax.annotation.Resource;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
+   private static final Logger log = LoggerFactory.getLogger(UserDetailsServiceImpl.class);
     @Resource
     private SysUserService userService;
+
+    @Resource
+    private PermissionService permissionService;
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         SysUser user = userService.selectUserByUserName(username);
-        if (user.equals("")){
+        if (StringUtils.isNull(user)){
+            log.info("登录用户：{} 不存在",username);
             throw new ServiceException("登录用户"+username+"不存在");
         }
         return createLoginUser(user);
     }
 
-    private UserDetails createLoginUser(SysUser user) {
 
-        return new LoginUser();
+    public UserDetails createLoginUser(SysUser user){
+        return new LoginUser(user.getUserId(),user.getDeptId(),user,permissionService.getMenuPermission(user));
     }
+
 }
