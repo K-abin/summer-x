@@ -1,5 +1,9 @@
 package com.spring.summer.service;
 
+import com.spring.summer.admin.RouterVo;
+import com.spring.summer.admin.SysMenu;
+
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -17,4 +21,8 @@ public interface SysMenuService {
      * @return
      */
     public Set<String> selectMenuPermissionByUserId(Long userId);
+
+    List<RouterVo> buildMenus(List<SysMenu> menu);
+
+    List<SysMenu> selectMenuTreeByUserId(Long userId);
 }

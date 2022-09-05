@@ -1,26 +1,28 @@
-package com.spring.summer.service;
+package com.spring.summer.service.impl;
 
 import com.spring.summer.admin.SysUser;
+import com.spring.summer.service.SysMenuService;
+import com.spring.summer.service.SysPermissionService;
+import com.spring.summer.service.SysRoleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
  * @Author CXB
- * @ClassName PermissionService
- * @date 2022/9/2 13:38
- * @Description 用户权限处理
+ * @ClassName SysPermissionServiceImpl
+ * @date 2022/9/5 13:40
+ * @Description TODO
  */
-@Component
-public class PermissionService {
+@Service
+public class SysPermissionServiceImpl implements SysPermissionService {
 
-    private static final Logger log = LoggerFactory.getLogger(PermissionService.class);
+    private static final Logger log = LoggerFactory.getLogger(SysPermissionService.class);
 
     @Autowired
     private SysRoleService roleService;
@@ -33,7 +35,8 @@ public class PermissionService {
      * @param user
      * @return
      */
-    public Set<String> getRolePermission(SysUser user){
+    @Override
+    public Set<String> getRolePermission(SysUser user) {
         Set<String> roles  = new HashSet<>();
         //判断是否是管理员
         if (user.isAdmin()){
@@ -50,7 +53,8 @@ public class PermissionService {
         return roles;
     }
 
-    public Set<String> getMenuPermission(SysUser user){
+    @Override
+    public Set<String> getMenuPermission(SysUser user) {
         Set<String> permissions = new HashSet<>();
         if(user.isAdmin()){
             permissions.add("*:*:*");
@@ -64,7 +68,6 @@ public class PermissionService {
         }
         return permissions;
     }
-
 
 
 }

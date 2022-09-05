@@ -4,18 +4,16 @@ import com.spring.summer.admin.SysUser;
 import com.spring.summer.admin.common.LoginUser;
 import com.spring.summer.common.utils.StringUtils;
 import com.spring.summer.exception.ServiceException;
-import com.spring.summer.service.PermissionService;
+import com.spring.summer.service.SysPermissionService;
 import com.spring.summer.service.SysUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.security.Permission;
 
 
 /**
@@ -32,7 +30,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private SysUserService userService;
 
     @Resource
-    private PermissionService permissionService;
+    private SysPermissionService permissionService;
 
 
     @Override

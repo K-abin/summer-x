@@ -21,4 +21,16 @@ public interface SysMenuMapper {
      */
     public List<String> selectMenuPermissionByUserId(Long userId);
 
+    /**
+     * 根据用户IＤ来查询菜单树
+     * @param userId
+     * @return
+     */
+    List<SysMenu> selectMenuTreeByUserId(Long userId);
+
+    /**
+     * 查询全部菜单，管理员查询全部菜单
+     * @return
+     */
+    List<SysMenu> selectMenuTreeAll();
 }
